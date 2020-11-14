@@ -2,7 +2,7 @@
 
 Classes:
     Upload()
-    Order()
+    OrderItem()
 """
 
 from django.db import models
@@ -10,6 +10,10 @@ from django.db import models
 
 class Upload(models.Model):
     """A model representing an upload."""
+
+    def insert(self):
+        """Inserts a new upload object into the db."""
+        self.save()
 
     def retrieve(self):
         """Retrieves and formats the upload object as a dict.
@@ -19,8 +23,8 @@ class Upload(models.Model):
         """
         upload = {
             "upload_id": self.id,
-            "number_of_rows": len(self.orders),
-            "items": [order.product_name for order in self.orders],
+            "number_of_rows": len(self.order_items),
+            "items": self.order_items,
         }
 
         return upload
@@ -30,26 +34,28 @@ class Upload(models.Model):
         return f"Upload ID: {self.id}"
 
 
-class Order(models.Model):
-    """A model representing an order.
+class OrderItem(models.Model):
+    """A model representing an order item.
 
     Attributes:
-        product_name: A str representing the name of the product ordered
-        product_quantity: An int representing the quantity of the product
-            ordered
-        upload: An object representing the upload this order belongs to
+        order_id: An int representing the id of the order the order item
+            belongs to
+        product_name: A str representing the name of the order item
+        product_quantity: An int representing the quantity of the order item
+        upload: An object representing the upload this order item belongs to
     """
 
+    order_id = models.PositiveIntegerField()
     product_name = models.CharField(max_length=64)
     product_quantity = models.PositiveIntegerField()
     upload = models.ForeignKey(
-        Upload, on_delete=models.CASCADE, related_name="orders"
+        Upload, on_delete=models.CASCADE, related_name="order_items"
     )
 
     def insert(self):
-        """Inserts a new order object into the db."""
+        """Inserts a new order item object into the db."""
         self.save()
 
     def __str__(self):
-        """An Order object's str representation."""
+        """An OrderItem object's str representation."""
         return f"{self.product_name}"

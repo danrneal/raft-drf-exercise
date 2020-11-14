@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "upload_server.apps.UploadServerConfig",
+    "rest_framework",
 ]
 
 MIDDLEWARE = [
@@ -79,8 +80,6 @@ DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
         "NAME": "uploads",
-        "USER": "postgres",
-        "PASSWORD": "postgres",
         "TEST": {
             "NAME": "uploads_test",
         },
