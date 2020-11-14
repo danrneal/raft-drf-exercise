@@ -1,3 +1,13 @@
 from django.shortcuts import render
 
-# Create your views here.
+
+def index(request):
+    return "Hello world!"
+
+
+def create_upload(request):
+    return "Create new upload!"
+
+
+def read_upload(request):
+    return "Read existing upload!"
