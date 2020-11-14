@@ -25,6 +25,10 @@ class Upload(models.Model):
 
         return upload
 
+    def __str__(self):
+        """An Upload object's str representation."""
+        return f"Upload ID: {self.id}"
+
 
 class Order(models.Model):
     """A model representing an order.
