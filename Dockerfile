@@ -6,4 +6,4 @@ WORKDIR /app
 RUN pip install -U pip
 RUN pip install -r requirements.txt
 
-ENTRYPOINT [ "gunicorn", "upload.wsgi:application" ]
+CMD gunicorn -b :${PORT-8000} upload.wsgi:application 
