@@ -25,11 +25,7 @@ Set up your environment variables:
 ```bash
 touch .env
 echo DJANGO_SECRET_KEY="XXX" >> .env
-echo DB_NAME="uploads" >> .env
-echo DB_USER="" >> .env
-echo DB_PASSWORD="" >> .env
-echo DB_HOST="localhost" >> .env
-echo DB_POST=5432 >> .env
+echo DATABASE_URL="postgresql://localhost:5432/uploads" >> .env
 ```
 
 Initialize and set up the database:
