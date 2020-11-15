@@ -14,15 +14,6 @@ from rest_framework.views import APIView
 from upload_server.models import OrderItem, Upload
 
 
-def index(request):
-    """Route Handler for the homepage.
-
-    Args:
-        request: A django request object
-    """
-    return "Hello world!"
-
-
 class CreateUpload(APIView):
     """Route handler for the endpoint for creating a new upload.
 
