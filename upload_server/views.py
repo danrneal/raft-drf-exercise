@@ -3,8 +3,10 @@
 Usage: manage.py runserver
 """
 
+from django.core.exceptions import ObjectDoesNotExist
 from django.db import IntegrityError, transaction
 from rest_framework import status
+from rest_framework.decorators import api_view
 from rest_framework.parsers import MultiPartParser
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -69,5 +71,20 @@ class CreateUpload(APIView):
         return Response(response, status=status.HTTP_201_CREATED)
 
 
-def read_upload(request):
-    return "Read existing upload!"
+@api_view(["GET"])
+def read_upload(request, upload_id):
+    """Route handler for the endpoint for retriving an upload.
+
+    Args:
+        request: A django request object
+        upload_id: An int representing the id of the upload to retrieve
+
+    Returns:
+        response: A json object representing info about the retrieved upload
+    """
+    try:
+        upload = Upload.objects.get(pk=upload_id)
+    except ObjectDoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    return Response(upload.retrieve(), status=status.HTTP_200_OK)

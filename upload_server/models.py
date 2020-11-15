@@ -21,10 +21,11 @@ class Upload(models.Model):
         Returns:
             upload: A dict representing the upload object
         """
+        items = [str(item) for item in self.order_items.all()]
         upload = {
             "upload_id": self.id,
-            "number_of_rows": len(self.order_items),
-            "items": self.order_items,
+            "number_of_rows": len(items),
+            "items": items,
         }
 
         return upload
