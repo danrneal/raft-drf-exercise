@@ -1,5 +1,5 @@
 -r requirements.txt
-black==20.8b1
+black==24.3.0
 flake8==3.8.4
 flake8_docstrings==1.5.0
 isort==5.6.4
