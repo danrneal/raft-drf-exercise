@@ -1,5 +1,5 @@
 dj_database_url==0.5.0
-Django==3.2.25
+Django==4.2.16
 djangorestframework==3.15.2
 gunicorn==22.0.0
 psycopg2-binary==2.8.6
